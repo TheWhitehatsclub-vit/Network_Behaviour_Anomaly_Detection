@@ -18,18 +18,24 @@ attack = pd.DataFrame({
     "duration": np.random.uniform(0.1, 0.5, 20)
 })
 
-X_train = normal[["connection_count", "packet_size", "data_sent", "duration"]]
+FEATURES = ["connection_count", "packet_size", "data_sent", "duration"]
+X_train = normal[FEATURES]
 
 model = IsolationForest(contamination=0.05, random_state=42)
 model.fit(X_train)
 print("Training done.")
 
-X_attack = attack[["connection_count", "packet_size", "data_sent", "duration"]]
+X_attack = attack[FEATURES]
 predictions = model.predict(X_attack)
 
 for i, pred in enumerate(predictions):
     label = "ANOMALY" if pred == -1 else "Normal"
     print(f"  Traffic {i+1}: {label}")
+
+normal_predictions = model.predict(X_train.sample(10))
+print("\nNormal traffic check:")
+for pred in normal_predictions:
+    print("  Normal" if pred == 1 else "  ANOMALY")
 
 joblib.dump(model, "model.pkl")
 print("Model saved.")
