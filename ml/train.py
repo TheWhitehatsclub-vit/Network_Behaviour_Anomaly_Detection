@@ -1,41 +1,37 @@
 from sklearn.ensemble import IsolationForest
-import numpy as np
 import pandas as pd
 import joblib
 
-# fake data for now, real CSV later
-normal = pd.DataFrame({
-    "connection_count": np.random.randint(10, 50, 200),
-    "packet_size": np.random.randint(500, 1500, 200),
-    "data_sent": np.random.randint(1000, 5000, 200),
-    "duration": np.random.uniform(1, 5, 200)
-})
+FEATURES = ["Inter_Arrival_Time", "Src_Port", "Dst_Port", "Seq", "Ack", "Win", "Payload_Len", "Packet_Length"]
 
-attack = pd.DataFrame({
-    "connection_count": np.random.randint(500, 1000, 20),
-    "packet_size": np.random.randint(50, 100, 20),
-    "data_sent": np.random.randint(50000, 100000, 20),
-    "duration": np.random.uniform(0.1, 0.5, 20)
-})
+normal = pd.read_csv("Regular_Network_Traffic_Standardized.csv", usecols=FEATURES)
+normal = normal.dropna()
 
-FEATURES = ["connection_count", "packet_size", "data_sent", "duration"]
-X_train = normal[FEATURES]
+model = IsolationForest(contamination=0.17, random_state=42)
+model.fit(normal)
+print(f"Training done. Rows used: {len(normal)}")
 
-model = IsolationForest(contamination=0.05, random_state=42)
-model.fit(X_train)
-print("Training done.")
+attack_files = [
+    "Aggressive_Scan_Standardized.csv",
+    "Full_Port_Scan_Standardized.csv",
+    "HTTP_Burst_Standardized.csv",
+    "Large_Download_Standardized.csv"
+]
 
-X_attack = attack[FEATURES]
-predictions = model.predict(X_attack)
+for filename in attack_files:
+    attack = pd.read_csv(filename, usecols=FEATURES)
+    attack = attack.dropna()
+    predictions = model.predict(attack)
+    anomaly_count = (predictions == -1).sum()
+    print(f"{filename}: {anomaly_count}/{len(attack)} flagged as ANOMALY")
 
-for i, pred in enumerate(predictions):
-    label = "ANOMALY" if pred == -1 else "Normal"
-    print(f"  Traffic {i+1}: {label}")
-
-normal_predictions = model.predict(X_train.sample(10))
-print("\nNormal traffic check:")
-for pred in normal_predictions:
-    print("  Normal" if pred == 1 else "  ANOMALY")
+normal_sample = normal.sample(20, random_state=42)
+normal_preds = model.predict(normal_sample)
+normal_correct = (normal_preds == 1).sum()
+print(f"\nNormal traffic check: {normal_correct}/20 correctly identified as Normal")
 
 joblib.dump(model, "model.pkl")
 print("Model saved.")
+
+feature_means = normal[FEATURES].mean().to_dict()
+joblib.dump(feature_means, "feature_means.pkl")

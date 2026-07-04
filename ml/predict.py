@@ -1,26 +1,23 @@
-import joblib
 import pandas as pd
+import joblib
+
+FEATURES = ["Inter_Arrival_Time", "Src_Port", "Dst_Port", "Seq", "Ack", "Win", "Payload_Len", "Packet_Length"]
 
 model = joblib.load("model.pkl")
+feature_means = joblib.load("feature_means.pkl")
 
-def predict(connection_count, packet_size, data_sent, duration):
-    data = pd.DataFrame({
-        "connection_count": [connection_count],
-        "packet_size": [packet_size],
-        "data_sent": [data_sent],
-        "duration": [duration]
-    })
+def predict(traffic_row: dict):
+    X = pd.DataFrame([traffic_row])[FEATURES]
+    score = model.decision_function(X)[0]
+    label = model.predict(X)[0]
+    severity = "high" if score < -0.15 else "medium" if score < -0.05 else "low"
 
-    prediction = model.predict(data)[0]
-    score = model.decision_function(data)[0]
-
-    label = "ANOMALY" if prediction == -1 else "Normal"
+    deviations = {f: abs(X[f].values[0] - feature_means[f]) for f in FEATURES}
+    top_feature = max(deviations, key=deviations.get)
 
     return {
-        "label": label,
-        "score": float(score)
+        "status": "anomaly" if label == -1 else "normal",
+        "anomaly_score": round(float(score), 4),
+        "severity": severity,
+        "triggered_by": top_feature
     }
-
-if __name__ == "__main__":
-    result = predict(700, 70, 80000, 0.3)
-    print(result)

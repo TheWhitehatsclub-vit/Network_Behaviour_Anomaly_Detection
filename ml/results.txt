@@ -1,0 +1,69 @@
+contamination=0.020  FP= 2.35%  avg_detection= 31.1%
+contamination=0.025  FP= 2.55%  avg_detection= 42.6%
+contamination=0.030  FP= 3.40%  avg_detection= 47.0%
+contamination=0.035  FP= 3.95%  avg_detection= 50.8%
+contamination=0.040  FP= 4.30%  avg_detection= 55.2%
+contamination=0.045  FP= 4.75%  avg_detection= 57.9%
+contamination=0.050  FP= 5.25%  avg_detection= 61.2%
+contamination=0.055  FP= 5.60%  avg_detection= 66.0%
+contamination=0.060  FP= 6.00%  avg_detection= 67.6%
+contamination=0.065  FP= 6.35%  avg_detection= 68.2%
+contamination=0.070  FP= 7.05%  avg_detection= 69.0%
+contamination=0.075  FP= 7.55%  avg_detection= 70.3%
+contamination=0.080  FP= 8.20%  avg_detection= 71.4%
+contamination=0.085  FP= 8.55%  avg_detection= 72.4%
+contamination=0.090  FP= 9.15%  avg_detection= 72.6%
+contamination=0.095  FP= 9.80%  avg_detection= 73.1%
+contamination=0.100  FP=10.10%  avg_detection= 73.6%
+contamination=0.105  FP=10.70%  avg_detection= 74.0%
+contamination=0.110  FP=11.10%  avg_detection= 74.9%
+contamination=0.115  FP=11.60%  avg_detection= 75.3%
+contamination=0.120  FP=12.15%  avg_detection= 76.1%
+contamination=0.125  FP=12.70%  avg_detection= 76.4%
+contamination=0.130  FP=13.10%  avg_detection= 77.2%
+contamination=0.135  FP=13.75%  avg_detection= 77.9%
+contamination=0.140  FP=14.45%  avg_detection= 78.2%
+contamination=0.145  FP=14.90%  avg_detection= 78.4%
+contamination=0.150  FP=15.50%  avg_detection= 78.9%
+contamination=0.155  FP=15.55%  avg_detection= 79.5%
+contamination=0.160  FP=15.90%  avg_detection= 79.7%
+contamination=0.165  FP=16.20%  avg_detection= 81.0%
+contamination=0.170  FP=16.60%  avg_detection= 82.6%
+contamination=0.175  FP=16.90%  avg_detection= 83.3%
+contamination=0.180  FP=17.15%  avg_detection= 84.0%
+
+ contam    FP%  AggrScan%  FullPort%  HTTPBurst%  LargeDL%  AvgDet%
+--------------------------------------------------------------------
+  0.020   2.35       17.4       55.0        37.5      14.4     31.1
+  0.025   2.55       25.4       57.8        50.0      37.0     42.6
+  0.030   3.40       28.9       60.9        57.1      41.1     47.0
+  0.035   3.95       32.8       67.4        61.4      41.8     50.8
+  0.040   4.30       38.0       70.8        64.7      47.3     55.2
+  0.045   4.75       41.1       73.8        67.2      49.3     57.9
+  0.050   5.25       43.9       78.2        69.4      53.4     61.2
+  0.055   5.60       51.9       80.3        72.3      59.6     66.0
+  0.060   6.00       55.1       81.1        73.2      61.0     67.6
+  0.065   6.35       56.4       81.8        73.7      61.0     68.2
+  0.070   7.05       58.5       82.1        74.3      61.0     69.0
+  0.075   7.55       62.7       82.6        75.0      61.0     70.3
+  0.080   8.20       63.4       83.2        75.9      63.0     71.4
+  0.085   8.55       64.1       83.8        76.8      65.1     72.4
+  0.090   9.15       64.1       84.1        77.0      65.1     72.6
+  0.095   9.80       64.8       84.3        77.5      65.8     73.1
+  0.100  10.10       65.2       84.6        78.1      66.4     73.6
+  0.105  10.70       66.2       84.9        78.6      66.4     74.0
+  0.110  11.10       66.6       85.2        78.8      69.2     74.9
+  0.115  11.60       67.2       85.4        79.2      69.2     75.3
+  0.120  12.15       69.0       85.9        80.4      69.2     76.1
+  0.125  12.70       69.3       86.2        80.8      69.2     76.4
+  0.130  13.10       71.4       86.4        81.0      69.9     77.2
+  0.135  13.75       72.8       86.6        81.7      70.5     77.9
+  0.140  14.45       73.5       86.8        82.1      70.5     78.2
+  0.145  14.90       73.5       86.8        82.6      70.5     78.4
+  0.150  15.50       73.9       87.1        84.2      70.5     78.9
+  0.155  15.55       74.6       87.4        85.5      70.5     79.5
+  0.160  15.90       74.6       87.6        86.2      70.5     79.7
+  0.165  16.20       76.3       87.9        89.1      70.5     81.0
+  0.170  16.60       79.4       88.1        90.4      72.6     82.6
+  0.175  16.90       79.8       88.2        90.4      74.7     83.3
+  0.180  17.15       79.8       88.3        90.4      77.4     84.0
