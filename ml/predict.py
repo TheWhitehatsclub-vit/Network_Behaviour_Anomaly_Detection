@@ -3,10 +3,9 @@ import joblib
 
 FEATURES = ["Inter_Arrival_Time", "Src_Port", "Dst_Port", "Seq", "Ack", "Win", "Payload_Len", "Packet_Length"]
 
-model = joblib.load("model.pkl")
-feature_means = joblib.load("feature_means.pkl")
-
 def predict(traffic_row: dict):
+    model = joblib.load("model.pkl")
+    feature_means = joblib.load("feature_means.pkl")
     X = pd.DataFrame([traffic_row])[FEATURES]
     score = model.decision_function(X)[0]
     label = model.predict(X)[0]
