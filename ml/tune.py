@@ -1,8 +1,7 @@
 from sklearn.ensemble import IsolationForest
 import pandas as pd
 
-FEATURES = ["Inter_Arrival_Time", "Payload_Len", "Packet_Length",
-            "Src_Port", "Dst_Port", "Seq", "Ack", "Win"]
+FEATURES = ["Inter_Arrival_Time", "Src_Port", "Dst_Port", "Seq", "Ack", "Win", "Payload_Len", "Packet_Length"]
 
 normal = pd.read_csv("Regular_Network_Traffic_Standardized.csv", usecols=FEATURES).dropna()
 

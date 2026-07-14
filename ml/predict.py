@@ -6,6 +6,17 @@ FEATURES = ["Inter_Arrival_Time", "Src_Port", "Dst_Port", "Seq", "Ack", "Win", "
 def predict(traffic_row: dict):
     model = joblib.load("model.pkl")
     feature_means = joblib.load("feature_means.pkl")
+
+    if hasattr(model, "feature_names_in_"):
+        expected = list(model.feature_names_in_)
+        if expected != FEATURES:
+            raise ValueError(
+                f"FEATURE ORDER MISMATCH!\n"
+                f"Model was trained on: {expected}\n"
+                f"This file is using:   {FEATURES}\n"
+                f"These must match exactly, in the same order."
+            )
+
     X = pd.DataFrame([traffic_row])[FEATURES]
     score = model.decision_function(X)[0]
     label = model.predict(X)[0]

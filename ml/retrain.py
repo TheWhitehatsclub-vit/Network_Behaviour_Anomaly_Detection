@@ -29,6 +29,17 @@ def retrain(false_positive_rows: list):
     updated_data = pd.concat([current_data, new_rows], ignore_index=True)
 
     old_model = joblib.load("model.pkl")
+
+    if hasattr(old_model, "feature_names_in_"):
+        expected = list(old_model.feature_names_in_)
+        if expected != FEATURES:
+            raise ValueError(
+                f"FEATURE ORDER MISMATCH!\n"
+                f"Model was trained on: {expected}\n"
+                f"This file is using:   {FEATURES}\n"
+                f"These must match exactly, in the same order."
+            )
+
     contamination = old_model.contamination
     joblib.dump(old_model, "model_backup.pkl")
 
