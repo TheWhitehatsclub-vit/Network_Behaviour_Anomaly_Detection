@@ -18,6 +18,11 @@ def predict(traffic_row: dict):
             )
 
     X = pd.DataFrame([traffic_row])[FEATURES]
+
+    if X.isnull().values.any():
+        missing = X.columns[X.isnull().any()].tolist()
+        raise ValueError(f"Missing/NaN values in input for features: {missing}")
+
     score = model.decision_function(X)[0]
     label = model.predict(X)[0]
     severity = "high" if score < -0.15 else "medium" if score < -0.05 else "low"
